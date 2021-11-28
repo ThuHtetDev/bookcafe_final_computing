@@ -15,6 +15,11 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('isbn');
+            $table->string('name');
+            $table->text('description');
+            $table->text('front_cover');
+            $table->text('back_cover');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('category_id');
@@ -23,6 +28,7 @@ class CreateBooksTable extends Migration
             $table->enum('status', [ 'pending', 'publish' ])->default('pending');
             $table->enum('is_reject', [ '0', '1' ])->default('0');
             $table->enum('is_cancel', [ '0', '1' ])->default('0');
+            $table->enum('is_available', [ '0', '1' ])->default('1');
             $table->timestamps();
         });
     }

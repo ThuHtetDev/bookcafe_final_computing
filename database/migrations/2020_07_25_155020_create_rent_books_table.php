@@ -20,9 +20,12 @@ class CreateRentBooksTable extends Migration
             $table->unsignedBigInteger('book_id');
             $table->foreign('book_id')->references('id')->on('books');
             $table->enum('rent_status', [ 'confirm', 'reject','queue','user_cancel' ])->default('queue');
-            $table->enum('has_return', [ '0', '1' ])->default('1');
+            $table->enum('has_return', [ '0', '1' ])->default('0');
+            $table->enum('return_approve', [ '0', '1' ])->default('0');
+
             $table->date('start_date');
             $table->date('return_date');
+            $table->date('real_return_date');
             $table->timestamps();
         });
     }
