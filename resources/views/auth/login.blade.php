@@ -86,6 +86,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         {{ __('Login') }}
             </button>    
         </div>
+        <a href="{{url('/redirect')}}" class="btn btn-danger btn-block">
+            Login with Google
+        </a>
+        <br>
         <div>
           <h3>Testing Accounts</h3>
           <ul>
