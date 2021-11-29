@@ -13,7 +13,7 @@ class CreateRentRentingTable extends Migration
      */
     public function up()
     {
-        Schema::create('rent_renting', function (Blueprint $table) {
+        Schema::create('rent_rating', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('rent_book_id');
             $table->foreign('rent_book_id')->references('id')->on('rent_books');
