@@ -687,8 +687,8 @@ class BookController extends Controller
      // Member Dashboard
      public function memberDashboard(){
         $authUser = Auth::user();
-        $authBookAvailable = Book::where('user_id',Auth::user()->id)->where('is_available','1')->where('is_reject','0')->where('is_cancel','0');
-        $myRentedList = RentBook::where('user_id',Auth::user()->id);
+        $authBookAvailable = Book::where('books.user_id',Auth::user()->id)->where('books.is_available','1')->where('books.is_reject','0')->where('books.is_cancel','0');
+        $myRentedList = RentBook::where('rent_books.user_id',Auth::user()->id);
         $today = Carbon::now()->toDateString();
 
         // $maxRentedBookForThisMonth = DB::table('users')
@@ -704,20 +704,20 @@ class BookController extends Controller
         // ->get();
 
         // dd($myRentedList->where('rent_status','confirm')->where('return_date','>',$today)->count());
-        $myOverDateBooks = $myRentedList->where('rent_status','confirm')->where('return_date','>',$today)->count();
-        $myCurrentRentBooks = $myRentedList->where('rent_status','confirm')->where('start_date','<=',$today )->where('return_date','>=',$today)->where('real_return_date',null)->count();
+        $myOverDateBooks = $myRentedList->where('rent_books.rent_status','confirm')->where('rent_books.return_date','>',$today)->count();
+        $myCurrentRentBooks = $myRentedList->where('rent_books.rent_status','confirm')->where('rent_books.start_date','<=',$today )->where('rent_books.return_date','>=',$today)->where('rent_books.real_return_date',null)->count();
 
        $data = [
         'name' => $authUser->name,
         'email' => $authUser->email,
         'app_lang' => $authUser->lang == 'mm' ? 'Myanmar' : 'English',
-        'authBookPublished' => $authBookAvailable->where('status','publish')->count(),
-        'authBookPending' => $authBookAvailable->where('status','pending')->count(),
-        'myRentedBooks' => $myRentedList->where('has_return','1')->where('real_return_date','!=',null)->count(),
-        'myRequestedBooks' => $myRentedList->where('rent_status','queue')->where('has_return','0')->count(),
+        'authBookPublished' => $authBookAvailable->where('books.status','publish')->count(),
+        'authBookPending' => $authBookAvailable->where('books.status','pending')->count(),
+        'myRentedBooks' => $myRentedList->where('rent_books.has_return','1')->where('rent_books.real_return_date','!=',null)->count(),
+        'myRequestedBooks' => $myRentedList->where('rent_books.rent_status','queue')->where('rent_books.has_return','0')->count(),
         'myCurrentRentBooks' => $myCurrentRentBooks,
         'myOverDateBooks' =>  $myOverDateBooks,
-        'myOverDatedCount' => $myRentedList->where('rent_status','confirm')->where('has_return','1')->where('real_return_date','!=',null)->where('return_date','<','real_return_date')->count(),
+        'myOverDatedCount' => $myRentedList->where('rent_books.rent_status','confirm')->where('rent_books.has_return','1')->where('rent_books.real_return_date','!=',null)->where('rent_books.return_date','<','rent_books.real_return_date')->count(),
         
        ];
        return response()->json($data);

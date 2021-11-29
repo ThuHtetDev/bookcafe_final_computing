@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <ul>
               <h5>Testing Admin account</h5>
               <li>Admin Email: admin@admin.com</li>
-              <li>Admin Password: password</li>
+              <li>Admin Password: password</li><br>
               <h5>Testing Member account</h5>
               <li>Member Email: testMember01@gmail.com</li>
               <li>Member Password: password</li>
