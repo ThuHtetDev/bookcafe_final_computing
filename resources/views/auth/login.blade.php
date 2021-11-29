@@ -84,13 +84,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="social-auth-links text-center mb-3">
             <button type="submit" class="btn btn-block btn-primary">
                                         {{ __('Login') }}
-            </button>
-         
-                         
+            </button>    
         </div>
-        <a href="{{url('/redirect')}}" class="btn btn-danger btn-block">
-            Login with Google
-        </a>
+        <div>
+          <h3>Testing Accounts</h3>
+          <ul>
+              <h5>Testing Admin account</h5>
+              <li>Admin Email: admin@admin.com</li>
+              <li>Admin Password: password</li>
+              <h5>Testing Member account</h5>
+              <li>Member Email: testMember01@gmail.com</li>
+              <li>Member Password: password</li>
+          </ul>
+
+        </div>
+     
       </form>
     </div>
     <!-- /.login-card-body -->
