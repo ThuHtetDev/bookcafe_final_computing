@@ -593,7 +593,7 @@ class BookController extends Controller
         ->join('rent_books','books.id','=','rent_books.book_id')
         ->whereMonth('rent_books.start_date', '=', Carbon::now()->month)
         ->whereYear('rent_books.start_date', Carbon::now()->year)
-        ->where('books.has_return','1')
+        ->where('rent_books.has_return','1')
         ->select(DB::raw('count(book_id) as count'),'books.id','books.name')
         ->groupBy('books.id')
         ->orderBy('count','desc')
